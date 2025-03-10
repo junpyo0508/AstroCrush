@@ -154,6 +154,17 @@ const Starfield = () => {
       console.error('An error happened', error);
     });
 
+    loader.load(modelPaths[8], (gltf) => {
+      const model = gltf.scene;
+      model.scale.set(0.8, 0.8, 0.8);
+      model.position.set(0, -0.1, 0.3);
+      model.rotation.set(0, Math.PI, 0); 
+      camera.add(model);
+
+    }, undefined, (error) => {
+      console.error('An error happened', error);
+    });
+
     const tubeGeo = new THREE.TubeGeometry(spline, 222, 0.65, 16, true);
 
     const boxGroup = new THREE.Group();

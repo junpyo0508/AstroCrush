@@ -7,6 +7,7 @@ const modelPaths = [
   './rocket_moon/scene.gltf',
   './cockc/scene.gltf',
   './rock/scene.gltf',
+  './a-wing_cockpit/scene.gltf',
 ];
 
 export default modelPaths;
