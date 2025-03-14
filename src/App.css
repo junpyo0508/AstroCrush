@@ -80,6 +80,21 @@ button:hover {
   text-shadow: 0 0 10px cyan, 0 0 20px blue;
 }
 
+#lives {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+
+#lives img {
+  width: 60px;
+  height: 60px;
+  filter: invert(100%);
+}
+
 #gameOverScreen {
   position: absolute;
   top: 50%;

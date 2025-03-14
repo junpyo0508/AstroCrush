@@ -13,6 +13,8 @@ import { playExplodeSound } from './sounds/explodeSound';
 import soundIcon from './data/sound-2-svgrepo-com.svg';
 import modelPaths from './data/modelPath';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
+import heartIcon from './data/heart.svg';
+import { playSpaceCrashSound } from './sounds/spaceCrashSound';
 
 const Starfield = () => {
   const [gameStarted, setGameStarted] = useState(false);
@@ -21,8 +23,8 @@ const Starfield = () => {
   const [timeLeft, setTimeLeft] = useState(60);
   const [gameOver, setGameOver] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
-  const [powerUpActive, setPowerUpActive] = useState(false);
   const [time, setTime] = useState(0);
+  const [lives, setLives] = useState(5);
   const mountRef = useRef(null);
   const timerRef = useRef(null);
   const audioRef = useRef(new Audio(backgroundMusic));
@@ -42,9 +44,11 @@ const Starfield = () => {
     setGameStarted(true);
     setDifficulty(difficulty);
     setTime(0);
+    setLives(5);
     document.getElementById('startScreen').style.display = 'none';
     document.getElementById('score').style.display = 'block';
     document.getElementById('timer').style.display = 'block';
+    document.getElementById('lives').style.display = 'block'; // 생명력 표시
     document.getElementById('soundButton').style.display = 'block';
     audioRef.current.play();
     init(difficultySettings[difficulty]);
@@ -69,18 +73,14 @@ const Starfield = () => {
     setGameOver(true);
     document.getElementById('score').style.display = 'none';
     document.getElementById('timer').style.display = 'none';
+    document.getElementById('lives').style.display = 'none';
     document.getElementById('soundButton').style.display = 'none';
     audioRef.current.pause();
     audioRef.current.currentTime = 0;
   };
 
   const retryGame = () => {
-    setGameOver(false);
-    setDifficulty(difficulty);
-    setDestroyedBoxes(0);
-    setTimeLeft(60);
-    setTime(0);
-    document.getElementById('startScreen').style.display = 'flex';
+    window.location.reload();
   };
 
   const toggleMute = () => {
@@ -128,15 +128,6 @@ const Starfield = () => {
       model.position.set(5, 4, 0);
       scene.add(model);
 
-      model.traverse((child) => {
-        if (child.isMesh) {
-          const texture = textureLoader.load('textures/myTexture.jpg');
-          texture.colorSpace = THREE.SRGBColorSpace;
-
-          child.material.map = texture;
-          child.material.needsUpdate = true;
-        }
-      });
     }, undefined, (error) => {
       console.error('An error happened', error);
     });
@@ -156,11 +147,16 @@ const Starfield = () => {
 
     loader.load(modelPaths[8], (gltf) => {
       const model = gltf.scene;
-      model.scale.set(0.8, 0.8, 0.8);
-      model.position.set(0, -0.1, 0.3);
+      model.scale.set(3, 3, 1.8);
+      model.position.set(0,-0.1,0.5);
       model.rotation.set(0, Math.PI, 0); 
       camera.add(model);
 
+      model.traverse((child) => {
+        if (child.isMesh) {
+          child.material.color.multiplyScalar(0.15);
+        }
+      });
     }, undefined, (error) => {
       console.error('An error happened', error);
     });
@@ -174,6 +170,7 @@ const Starfield = () => {
     const size = 0.25;
 
     const boxGeo = new THREE.BoxGeometry(size, size, size);
+    const hitBoxMat = new THREE.MeshBasicMaterial({ opacity: 0, transparent: true });
 
     const light = new THREE.HemisphereLight(0xffffff, 0.07, 0.5);
     light.position.set(0, 0, 0);
@@ -194,11 +191,16 @@ const Starfield = () => {
           transparent: true,
           opacity: 0,
         });
-        const hitBox = new THREE.Mesh(boxGeo, boxMat);
+        const hitBox = new THREE.Mesh(boxGeo, hitBoxMat); 
         hitBox.name = 'rock';
 
         pos.x += Math.random() - 0.4;
         pos.z += Math.random() - 0.4;
+
+        if (pos.distanceTo(camera.position) < 5) {
+          pos.z += 5;
+        }
+
         hitBox.position.copy(pos);
         const rote = new THREE.Vector3(
           Math.random() * Math.PI,
@@ -210,6 +212,7 @@ const Starfield = () => {
         modelClone.position.copy(pos);
         modelClone.scale.set(0.035, 0.035, 0.035);
         modelClone.rotation.set(rote.x, rote.y, rote.z);
+        hitBox.scale.set(2, 2, 2);
         hitBox.userData.box = modelClone;
         boxGroup.add(hitBox);
         scene.add(modelClone);
@@ -313,6 +316,26 @@ const Starfield = () => {
       return laserBolt;
     };
 
+    const checkCollision = () => {
+      const cameraBox = new THREE.Box3().setFromObject(camera);
+      boxGroup.children.forEach((box) => {
+        const boxBox = new THREE.Box3().setFromObject(box);
+        const distance = camera.position.distanceTo(box.position);
+        if (cameraBox.intersectsBox(boxBox) && distance < 1) {
+          setLives(prev => {
+            const newLives = prev - 1;
+            if (newLives <= 0) {
+              endGame();
+            }
+            return newLives;
+          });
+          playSpaceCrashSound(isMuted);
+          boxGroup.remove(box);
+          scene.remove(box.userData.box);
+        }
+      });
+    };
+
     const updateCamera = (t) => {
       const newTime = Math.pow(t * settings.speedMultiplier, 1.2);
       setTime(newTime);
@@ -327,6 +350,7 @@ const Starfield = () => {
     const animate = (t = 0) => {
       requestAnimationFrame(animate);
       updateCamera(t);
+      checkCollision();
       crosshairs.position.set(mousePos.x, mousePos.y, -1);
       lasers.forEach(l => l.userData.update());
       composer.render(scene, camera);
@@ -368,8 +392,17 @@ const Starfield = () => {
   useEffect(() => {
     document.getElementById('score').style.display = 'none';
     document.getElementById('timer').style.display = 'none';
+    document.getElementById('lives').style.display = 'none'; // 생명력 숨기기
     document.getElementById('soundButton').style.display = 'none';
   }, []);
+
+  const renderLives = () => {
+    const hearts = [];
+    for (let i = 0; i < lives; i++) {
+      hearts.push(<img key={i} src={heartIcon} alt="Heart Icon" />);
+    }
+    return hearts;
+  };
 
   return (
     <div ref={mountRef}>
@@ -381,6 +414,7 @@ const Starfield = () => {
       </div>
       <div id="score">Destroyed Boxes: {destroyedBoxes}</div>
       <div id="timer">Time Left: {timeLeft}s</div>
+      <div id="lives">{renderLives()}</div>
       <button id="soundButton" onClick={toggleMute}>
         <img src={soundIcon} alt="Sound Icon" />
       </button>
