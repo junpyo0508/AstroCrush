@@ -3,7 +3,7 @@
 body {
   margin: 0;
   padding: 0;
-  overflow: hidden;
+
   height: 100vh;
   background-color: black;
   font-family: 'Orbitron', sans-serif;
@@ -20,22 +20,33 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
+  z-index: 1;
 }
 
-/* 웜홀 회전 효과 */
+#spaceship{
+  position:fixed;
+  width: 100%;
+  height: 100%;
+
+  z-index: -1;
+}
+
 @keyframes warp {
   0% { background-size: 100% 100%; }
   50% { background-size: 120% 120%; }
   100% { background-size: 100% 100%; }
 }
 
-/* 게임 제목 */
 h1 {
   color: white;
   font-size: 5rem;
   text-shadow: 0 0 10px cyan, 0 0 20px blue;
   text-align: center;
   margin-bottom: 40px;
+}
+
+#ArticleName{
+  margin-bottom: 0px;
 }
 
 button {
@@ -60,6 +71,12 @@ button:hover {
   color: black;
   box-shadow: 0 0 20px cyan, 0 0 40px white;
   transform: scale(1.1);
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
 
 #score {
@@ -152,9 +169,38 @@ button:hover {
 #soundButton img {
   width: 40px; 
   height: 40px;
-  filter: invert(100%); /* 이미지 색상을 흰색으로 변경 */
+  filter: invert(100%);
 }
 
 #soundButton:hover img {
   transform: scale(1.1);
+}
+
+article {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  z-index: 10;
+}
+
+h2 {
+  margin: 0 auto;
+  width: 60%;
+  color: #eee;
+  font-size: 100px;
+}
+
+h2 {
+  color: white;
+  font-size: 5rem;
+  text-shadow: 0 0 10px cyan, 0 0 20px blue;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+p {
+  margin: 60px auto;
+  width: 60%;
+  color: #d4d4d4;
+  font-size: 40px;
 }

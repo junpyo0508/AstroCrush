@@ -15,6 +15,7 @@ import modelPaths from './data/modelPath';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
 import heartIcon from './data/heart.svg';
 import { playSpaceCrashSound } from './sounds/spaceCrashSound';
+import { Story } from './Story.jsx';
 
 const Starfield = () => {
   const [gameStarted, setGameStarted] = useState(false);
@@ -48,7 +49,7 @@ const Starfield = () => {
     document.getElementById('startScreen').style.display = 'none';
     document.getElementById('score').style.display = 'block';
     document.getElementById('timer').style.display = 'block';
-    document.getElementById('lives').style.display = 'block'; // 생명력 표시
+    document.getElementById('lives').style.display = 'block';
     document.getElementById('soundButton').style.display = 'block';
     audioRef.current.play();
     init(difficultySettings[difficulty]);
@@ -406,12 +407,7 @@ const Starfield = () => {
 
   return (
     <div ref={mountRef}>
-      <div id="startScreen">
-        <h1>AstroCrush</h1>
-        <button onClick={() => startGame('easy')}>Easy</button>
-        <button onClick={() => startGame('medium')}>Medium</button>
-        <button onClick={() => startGame('hard')}>Hard</button>
-      </div>
+      <Story startGame={startGame}/>
       <div id="score">Destroyed Boxes: {destroyedBoxes}</div>
       <div id="timer">Time Left: {timeLeft}s</div>
       <div id="lives">{renderLives()}</div>

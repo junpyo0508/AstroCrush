@@ -1,0 +1,11 @@
+Model Information:
+* title:	ZR-709A II 'Resplendent Equinox'
+* source:	https://sketchfab.com/3d-models/zr-709a-ii-resplendent-equinox-1bcf6fcceac941619959555ba6f28f68
+* author:	Vaportrash (https://sketchfab.com/vaportrash)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "ZR-709A II 'Resplendent Equinox'" (https://sketchfab.com/3d-models/zr-709a-ii-resplendent-equinox-1bcf6fcceac941619959555ba6f28f68) by Vaportrash (https://sketchfab.com/vaportrash) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
