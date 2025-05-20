@@ -115,28 +115,28 @@ export function Story({ startGame }) {
 
     let moveNum = 0;
     let scrollTop = 0;
-    
+
     const scrollFunc = () => {
       scrollTop = window.scrollY;
     };
-    
+
     const animate = () => {
       moveNum += (scrollTop / 200 - moveNum) * 0.1;
 
-      if (model) {
-        model.rotation.y += 0.1;
-      }
-      if (modelBody) {
+      // if (model) {
+      //   model.rotation.y += 0.1;
+      // }
+      // if (modelBody) {
 
-        // modelBody.position.x = moveNum;
-        // // modelBody.position.y += moveNum;
-        // modelBody.position.z += moveNum/12;
-        modelBody.rotation.y += 0.1;
+      //   // modelBody.position.x = moveNum;
+      //   // // modelBody.position.y += moveNum;
+      //   // modelBody.position.z += moveNum/12;
+      //   modelBody.rotation.y += 0.1;
 
-        modelBody.rotation.y = moveNum;
-        modelBody.rotation.z = moveNum / 12;
-      }
-    
+      //   modelBody.rotation.y = moveNum;
+      //   modelBody.rotation.z = moveNum / 12;
+      // }
+
       renderer.render(scene, camera);
       requestAnimationFrame(animate);
     };
@@ -176,16 +176,21 @@ export function Story({ startGame }) {
             <div id='spaceship'></div>
             <h2>AstroCrush</h2>
             <p>
-              “Food” has always been the best medium for sharing “culture.”
+              In the distant future, humanity has spread across the galaxy, colonizing new planets and establishing interstellar trade routes.<br/>
+              But a sudden threat emerges: the "Stardust Storm," a mysterious cosmic force disrupting the galaxy’s stability. <br/> 
+              Made up of drifting asteroids and debris, it carves a path of destruction through vital pathways and settlements.
             </p>
             <p>
-              And this “culture” can be as simple as your mom’s old recipe passed on since your great great great grandparents, or as big as one nation’s traditional food that represents their rich history and collective value.
+              Scientists soon uncover a shocking truth—this isn’t a natural disaster. <br/>
+              The storm is a relic of the "Kronax," an ancient alien civilization that engineered it as a defense against invaders. <br/>
+              Once a controlled system, it now spirals out of hand, endangering all life in the galaxy.
             </p>
             <p>
-              Sharing “food” means introducing a new culture; a truly unique experience for each and every person. For some, it would be a familiar everyday dish, but for others it's a whole new culinary experience. (Just like how Kimchi means different things to different people)
+              Enter "Kael," a rookie pilot in the "Guardian Fleet." Kael was once just an ordinary cargo hauler, but everything changes when they discover the "Stella Blade"—an advanced Kronax combat ship—while attempting to save a storm-ravaged planet.<br/> Armed with precision energy weapons and unmatched agility, this vessel becomes the galaxy’s last hope against the chaos.
             </p>
             <p>
-              Sharing “food” means introducing a new culture; a truly unique experience for each and every person. For some, it would be a familiar everyday dish, but for others it's a whole new culinary experience. (Just like how Kimchi means different things to different people)
+              The Galactic Alliance gives Kael a critical mission: find and destroy the source of the Stardust Storm.
+              <br/> Hidden at its core is the Kronax control device, a relic that must be shattered to bring peace. <br/>But the journey won’t be easy—Kael must battle increasingly deadly asteroid waves and fend off the "Space Raiders," a rogue faction bent on seizing the storm’s power for themselves.
             </p>
           </article>
         )}
