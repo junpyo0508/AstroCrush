@@ -176,21 +176,23 @@ export function Story({ startGame }) {
             <div id='spaceship'></div>
             <h2>AstroCrush</h2>
             <p>
-              In the distant future, humanity has spread across the galaxy, colonizing new planets and establishing interstellar trade routes.<br/>
-              But a sudden threat emerges: the "Stardust Storm," a mysterious cosmic force disrupting the galaxy’s stability. <br/> 
-              Made up of drifting asteroids and debris, it carves a path of destruction through vital pathways and settlements.
+              In the near future, with space development booming, asteroids and orbital debris around planets have become a serious issue.<br />
+              To deal with it, a new job emerges: the space debris cleaner.
             </p>
             <p>
-              Scientists soon uncover a shocking truth—this isn’t a natural disaster. <br/>
-              The storm is a relic of the "Kronax," an ancient alien civilization that engineered it as a defense against invaders. <br/>
-              Once a controlled system, it now spirals out of hand, endangering all life in the galaxy.
+              The main character, Kael, pilots a small cleaning ship, spending each day breaking apart drifting asteroids and space junk near planets.<br />
+              The job is simple: scan the objects, choose the right tool, shoot, and clean up the remains.
             </p>
             <p>
-              Enter "Kael," a rookie pilot in the "Guardian Fleet." Kael was once just an ordinary cargo hauler, but everything changes when they discover the "Stella Blade"—an advanced Kronax combat ship—while attempting to save a storm-ravaged planet.<br/> Armed with precision energy weapons and unmatched agility, this vessel becomes the galaxy’s last hope against the chaos.
+              One day, Kael discovers a high-performance abandoned cleaning ship called “Stella Blade” and manages to repair and use it.<br />
+              This ship is equipped with precision lasers, shockwave missiles, and an auto-orbit calculation system—a major upgrade.<br />
+              With this new vessel, Kael’s efficiency skyrockets.
+              They’re assigned to larger zones and encounter all kinds of strange junk, rare minerals, and occasionally unknown equipment during their routine.
             </p>
             <p>
-              The Galactic Alliance gives Kael a critical mission: find and destroy the source of the Stardust Storm.
-              <br/> Hidden at its core is the Kronax control device, a relic that must be shattered to bring peace. <br/>But the journey won’t be easy—Kael must battle increasingly deadly asteroid waves and fend off the "Space Raiders," a rogue faction bent on seizing the storm’s power for themselves.
+              In the end, this is a story about<br/>
+              “a regular worker cleaning up space.”<br/>
+              The only twist? The workplace is zero-gravity fields and meteor showers.
             </p>
           </article>
         )}
