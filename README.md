@@ -2,7 +2,6 @@
 **A Space Debris Cleanup Game Set in the Near Future**
 
 [🌐 Play the Game](https://junpyo0508.github.io/AstroCrush/)  
-[📁 GitHub Repository](https://github.com/junpyo0508/AstroCrush.git)
 
 <img width="w-full" alt="image" src="https://github.com/user-attachments/assets/f635318c-a992-4e65-8a62-23f2e3e73ba6" />
 
